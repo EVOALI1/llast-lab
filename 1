@@ -1,0 +1,87 @@
+#include <iostream>
+#include <cstdlib>
+using namespace std;
+
+int N = 10;
+
+class stack
+{
+private:    
+    int tail;
+    int* arr;
+
+public:
+    stack() //конструктор без параметров
+    {
+        tail = -1;
+        arr = new int[N];
+    }
+    stack(int m) //конструктор с одним параметром
+    {
+        tail = -1;
+        arr = new int[m];
+    }
+    ~stack() //деструктор
+    {
+        delete[] arr;
+    }
+
+    void push(int a)
+    {
+        if (tail == N - 1)
+        {
+            cout << "Stack is overfilled!";
+        }
+        else
+        {
+            tail++;
+            arr[tail] = a;
+        }
+    }
+
+    void pop()
+    {
+        if (tail < 0)
+        {
+            cout << "Stack is empty!";
+        }
+        else
+        {
+            cout << arr[tail];
+            tail--;
+        }
+    }
+};
+
+int main()
+{
+    setlocale(0, "");
+    bool r;
+    
+    cout << "Количество элементов:";
+    cin >> N;
+
+    stack jingle(N);
+    do {
+        int znach;
+
+        cout << "\n1 - push| 0 - pop \n";
+        cin >> r;
+
+        if (r == 1)
+        {
+            cout << "\nВведите значение: ";
+            cin >> znach;
+            jingle.push(znach);
+        }
+        else if (r == 0)
+        {
+            cout << "\nЗначение равно: ";
+            jingle.pop();
+            cout << endl;
+        }
+        
+    } while ((r==1) or (r==0));
+
+    return 0;
+}
